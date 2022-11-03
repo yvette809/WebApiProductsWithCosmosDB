@@ -47,6 +47,22 @@ namespace WebApiProducts.Controllers
       
         }
 
+        [HttpGet("{id}")]
+
+        public async Task <IActionResult> GetOne (Guid id)
+        {
+
+            try
+            {
+                return new OkObjectResult( await _context.Products.FirstOrDefaultAsync(x => x.Id == id));
+               
+
+            }
+            catch (Exception ex) { Debug.WriteLine(ex.Message); }
+            return new BadRequestResult();
+        }
+
+
         [HttpPut("id")]
         public async Task<IActionResult> Update(Guid id, ProductRequest req)
         {
